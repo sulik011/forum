@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ user.username }}
+{% endblock %}
+
+{% block content %}
+<div class="create-article"><form class="site-form" action="{% url 'account:user' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Username ==>  {{ user.username }}</p>
+    <p>Age ==>  {{ user.age }}</p>
+    <p>Email ==> {{ user.email }}</p>
+
+</form>
+</div>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Articles{% endblock title %}
+{% block content %}
+{% autoescape on %}
+    {{ body }}
+{% endautoescape %}
+{% if user.is_authenticated %}
+
+<h1><p align="center"><a href="{% url 'article_create' %}">Create</a></p></h1>
+{% endif %}
+{% for article in articles %}
+
+<p>
+<div class="card">
+    <div class="card-header">
+    <p align="center"><font size="+3">
+        <span class="font-weight-bold"><a href="{% url 'article_detail' article.pk %}"> {{ article.title }}</a></span>
+    </font></p>
+    <span class="text-muted">        {{ article.body }}
+</span>
+        <p align="right">Category:{{ article.category }}</p>
+        </div>
+        <div class="card-body">by {{ article.author }} <p align="right">
+        {{ article.date }}</p>
+
+        </div>
+<div class="card-footer">
+{% for comment in article.comments.all %}
+<p>
+<span class="font-weight-bold">{{ comment.author }} &middot;</span>
+{{ comment }}
+</p>
+{% endfor %}
+</div>
+
+</div>
+
+{% endfor %}
+
+
+        {% include "pagination.html" with page=articles %}
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Home{% endblock title %}
+
+
+{% block content %}
+<p align="center"> <font size="30" color="red">Disclaimer</font></p>
+
+{% if user.is_authenticated %}
+
+<p>Welcome</p>
+{% else %}
+        <p>You are not logged in</p>
+<p><a href="{% url 'login' %}">Login</a></p>
+{% endif %}
+<p><a href="{% url 'article_list' %}">Start</a></p>
+
+
+
+
+{% endblock content %}

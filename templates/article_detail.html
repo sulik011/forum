@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="article-entry">
+    <h1 align="center">{{ object.title }}</h1>
+    <img src="{{ object.image }}">
+    <p>{{ object.body }}</p>
+</div>
+        <p align="right">by {{ object.author }} | {{ object.date }}</p>
+
+{% if user.is_authenticated %}
+<p><a href="{% url 'article_edit' article.pk %}">Edit</a> </p>
+    <p><a href="{% url 'article_delete' article.pk %}">Delete</a></p>
+
+{% endif %}
+<div class="card-footer">
+    <h2>Comments:</h2>
+{% for comment in article.comments.all %}
+    <p>
+        <span class="font-weight-bold">{{ comment.author }} &middot;</span>
+        {{ comment }}
+    </p>
+{% endfor %}
+</div>
+
+
+
+
+
+
+    <h2>Add a new comment</h2>
+
+        <p><a href="{% url 'new_comment' article.pk %}">Add comment</a></p>
+
+<p align="below">Back to <a href="{% url 'article_list' %}">All Articles</a>.</p>
+{% endblock content %}
